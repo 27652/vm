@@ -1,5 +1,8 @@
 
-import{init,runWasix} from "@wasmer/sdk"
+import { init } from "@wasmer/wasi";
+import { Buffer } from "buffer";
+
+Object.assign(globalThis, { Buffer });
 
 export interface RunOptions {
     args?: string[];
@@ -36,6 +39,9 @@ export async function runWasm(
 ):Promise<RunResult>{
     await initializeVM();
 
+
+    const { WASI } = await import("@wasmer/wasi");
+
     console.log("crossOriginIsolated:", crossOriginIsolated);
     const module = await WebAssembly.compile(new Uint8Array(wasm));
     console.log("WASM compiled successfully");
@@ -43,22 +49,20 @@ export async function runWasm(
     console.log("exports:", WebAssembly.Module.exports(module));
 
 
-    const instance = await runWasix(module,{
-        program:"program",
-        args:options.args??[],
-        env:options.env??{},
-    })
+  const wasi = new WASI({
+    args: ["program", ...(options.args ?? [])],
+    env: options.env ?? {},
+  });
 
-    console.log("WASIX instance started");
+    console.log("WASI instance started");
 
-    const result = await instance.wait()
+  const instance = await wasi.instantiate(module, {});
 
-    return{
-        code:result.code,
-        stdout:result.stdout,
-        stderr:result.stderr
-    };
+  const code = wasi.start(instance);
 
-
-
+  return {
+    code,
+    stdout: wasi.getStdoutString(),
+    stderr: wasi.getStderrString(),
+  };
 }
