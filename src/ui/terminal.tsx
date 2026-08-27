@@ -41,13 +41,13 @@ export function WasmTerminal({
     if (!terminalRef.current) return;
 
     if (stdout) {
-      terminalRef.current.writeln(stdout);
+      terminalRef.current.writeln(stdout.replace(/\n/g, "\r\n"));
     }
 
     if (stderr) {
-      terminalRef.current.writeln(stderr);
+      terminalRef.current.writeln(stderr.replace(/\n/g, "\r\n"));
     }
   }, [stdout, stderr]);
 
-  return <div ref={terminalElement} style={{ height: 400 }} />;
+  return <div ref={terminalElement} style={{ height: 400,width:"100%",textAlign:"left" }} />;
 }

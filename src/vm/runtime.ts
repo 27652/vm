@@ -56,7 +56,7 @@ export async function runWasm(
 
     console.log("WASI instance started");
 
-  const instance = await wasi.instantiate(module, {});
+  const instance = wasi.instantiate(module, {});
 
   const code = wasi.start(instance);
 
