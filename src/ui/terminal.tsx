@@ -32,7 +32,16 @@ export function WasmTerminal({
 
     terminal.writeln("WASI terminal ready");
 
+    //capture input
+    const inputDisposable = terminal.onData((data) => {
+    console.log("keyboard input:", data);
+
+    // Echo what the user types
+    terminal.write(data);
+  });
+
     return () => {
+      inputDisposable.dispose();
       terminal.dispose();
     };
   }, []);
