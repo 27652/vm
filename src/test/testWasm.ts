@@ -1,4 +1,4 @@
-import {runWasm} from "../vm/runtime";
+import {runWasm} from "../vm/p1/runtime";
 
 export async function testRuntime() {
   const response = await fetch("/code/p1/main.wasm");
