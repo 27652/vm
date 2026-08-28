@@ -1,0 +1,11 @@
+package playground:demo;
+
+interface api {
+    add: func(a: u32, b: u32) -> u32;
+}
+
+world app {
+    export api;
+    export wasi:cli/run@0.2.7;
+}
+

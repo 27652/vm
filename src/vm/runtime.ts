@@ -2,6 +2,9 @@
 import { init } from "@wasmer/wasi";
 import { Buffer } from "buffer";
 
+
+
+
 Object.assign(globalThis, { Buffer });
 
 export interface RunOptions {
