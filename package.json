@@ -11,6 +11,7 @@
     "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
+    "@bytecodealliance/preview2-shim": "^0.23.0",
     "@bytecodealliance/jco-transpile": "^0.12.1",
     "@wasmer/sdk": "^0.10.0",
     "@wasmer/wasi": "^1.2.2",
@@ -21,7 +22,6 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "@bytecodealliance/preview2-shim": "^0.23.0",
     "@cloudflare/vite-plugin": "^1.54.1",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
