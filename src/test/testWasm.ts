@@ -1,7 +1,7 @@
 import {runWasm} from "../vm/runtime";
 
 export async function testRuntime() {
-  const response = await fetch("/code/main.wasm");
+  const response = await fetch("/code/p1/main.wasm");
   const buffer = await response.arrayBuffer();
   const wasm = new Uint8Array(buffer);
 
