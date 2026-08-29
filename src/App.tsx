@@ -12,7 +12,7 @@ import {
     createComponentClient,
     type ComponentClient,
     type LoadResult,
-} from "./vm/runtime-p2/component-client";
+} from "./vm/runtime/runtime-p2/component-client";
 
 import {
     WasmTerminal,
